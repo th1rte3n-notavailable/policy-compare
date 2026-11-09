@@ -1,0 +1,185 @@
+ <mujoco model="wheeled_legged_hero">
+  <compiler angle="radian" meshdir="assets" autolimits="true" balanceinertia="true" />
+
+  <default>
+    <default class="robot">
+      <default class="visual">
+        <geom material="visual_material" contype="0" conaffinity="0" group="2" />
+      </default>
+      <default class="collision">
+        <geom material="collision_material" contype="0" conaffinity="1" group="1" condim="3" />
+      </default>
+    </default>
+  </default>
+
+  <asset>
+    <material name="visual_material" rgba="0.5 0.5 0.5 1" />
+    <material name="collision_material" rgba="0.0 0.4 0.8 0.2" />
+
+    <mesh name="base" file="wholebody-reduced.stl" />
+    <mesh name="thigh_L" file="thigh_L.STL" />
+    <mesh name="thigh_R" file="thigh_R.STL" />
+    <mesh name="leg1_L" file="leg1_L.STL" />
+    <mesh name="leg1_R" file="leg1_R.STL" />
+    <mesh name="leg2_L" file="leg2_L.STL" />
+    <mesh name="leg2_R" file="leg2_R.STL" />
+    <mesh name="leg3_L" file="leg3_L.STL" />
+    <mesh name="leg3_R" file="leg3_R.STL" />
+    <mesh name="leg4_L" file="leg4_L.STL" />
+    <mesh name="leg4_R" file="leg4_R.STL" />
+    <mesh name="leg5_L" file="leg5_L.STL" />
+    <mesh name="leg5_R" file="leg5_R.STL" />
+    <mesh name="wheel_L" file="wheel_L.STL" />
+    <mesh name="wheel_R" file="wheel_R.STL" />
+  </asset>
+
+  <worldbody>
+    <body name="base_link" pos="0 0 1" quat="1 0 0 0" childclass="robot">
+      <freejoint name="base_floating_joint"/>
+      <inertial pos="-0.003018 0.014007 -0.003970" mass="20.100000" diaginertia="0.462033 0.616249 0.740686"/>
+      <geom name="base_collision" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="base" class="collision"/>
+      <geom name="base_visual" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="base" class="visual"/>
+      <geom name="base_bottom_collision" pos="0 0 -0.140943" quat="1 0 0 0" type="box" size="0.347350 0.160000 0.020000" class="collision" group="3" />
+      <site name='imu_site' pos="0 0 0" quat="1 0 0 0" />
+      <body name="L_thigh" pos="0 0.169499 0" quat="0.973249 0 -0.229753 0">
+        <joint name="L_thigh_hipjoint" ref="-0.463933" range="-62.8 62.8" axis="0 1 0" />
+        <inertial pos="-0.089892 0.006061 0.000732" quat="1 0 0 0" mass="0.242113" diaginertia="0.000087 0.001340 0.001259" />
+        <geom name="L_thigh_collision" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="thigh_L" class="collision" />
+        <geom name="L_thigh_visual" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="thigh_L" class="visual" />
+        <site name="L_closed_loop_site1" pos="-0.100000 0.015000 0" size="0.002" rgba="1 1 0 1"/>
+        <site name="L_constant_force_site1" pos="-0.016246 0.005500 -0.044635" size="0.002" rgba="1 1 0 1"/>
+        <site name="L_leglength_sensor_site1" pos="0 0 0" size="0.002" rgba="1 1 0 1"/>
+        <body name="L_leg5" pos="-0.215000 0.004000 0" quat="0.832131 0 0.554628 0">
+          <joint name="L_leg5_joint" ref="-1.965552" range="-2.557970 -1.017882" axis="0 1 0" />
+          <inertial pos="0.098866 0.020521 -0.000374" quat="1 0 0 0" mass="0.4923710" diaginertia="0.000222 0.006123 0.005967" />
+          <geom name="L_leg5_collision" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="leg5_L" class="collision" />
+          <geom name="L_leg5_visual" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="leg5_L" class="visual" />
+          <site name="L_closed_loop_site2" pos="-0.056382 0.011000 0.020521" size="0.002" rgba="1 1 0 1"/>
+          <site name="L_constant_force_site2" pos="0.049508 0.001500 -0.007000" size="0.002" rgba="1 1 0 1"/>
+          <site name="L_leglength_sensor_site2" pos="0.254000 0.026000 0" size="0.002" rgba="1 1 0 1"/>
+          <body name="L_wheel" pos="0.254000 0.026000 0" quat="1 0 0 0">
+            <joint name="L_wheel_joint" axis="0 1 0" />
+            <inertial pos="-0.000083 0.014232 0.000225" quat="1 0 0 0" mass="0.700000" diaginertia="0.000671 0.001081 0.000673" />
+            <geom name="L_wheel_ground_collision" pos="0 0.021 0" quat="0.707107 0.707107 0 0" type="cylinder" size="0.065 0.01" class="collision" group="3" />
+            <geom name="L_wheel_visual" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="wheel_L" class="visual" />
+          </body>
+        </body>
+      </body>
+      <body name="L_leg1" pos="0 0.184499 0" quat="0.973216 0 0.229896 0">
+        <joint name="L_leg1_hipjoint" ref="0.463943" range="-62.8 62.8" axis="0 1 0" />
+        <inertial pos="0.031594 0.001353 0.000000" quat="1 0 0 0" mass="0.074014" diaginertia="0.000019 0.000120 0.000108" />
+        <geom name="L_leg1_collision" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="leg1_L" class="collision" />
+        <geom name="L_leg1_visual" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="leg1_L" class="visual" />
+        <body name="L_leg2" pos="0.100000 0 0" quat="0.832071 0 -0.554675 0">
+          <joint name="L_leg2_joint" axis="0 1 0" />
+          <inertial pos="-0.056128 -0.005198 0.000000" quat="1 0 0 0" mass="0.039289" diaginertia="0.000002 0.000068 0.000067" />
+          <geom name="L_leg2_collision" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="leg2_L" class="collision" />
+          <geom name="L_leg2_visual" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="leg2_L" class="visual" />
+          <body name="L_leg3" pos="-0.118140 0 0" quat="0.718376 0 0.695644 0">
+            <joint name="L_leg3_joint" axis="0 1 0" />
+            <inertial pos="-0.090962 0.003000 -0.007150" quat="1 0 0 0" mass="0.048623" diaginertia="0.000005 0.000145 0.000140" />
+            <geom name="L_leg3_collision" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="leg3_L" class="collision" />
+            <geom name="L_leg3_visual" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="leg3_L" class="visual" />
+            <site name="L_closed_loop_site3" pos="-0.117331 0 -0.013796" size="0.002" rgba="1 1 0 1"/>
+            <body name="L_leg4" pos="-0.175723 0 0" quat="0.798276 0 -0.602277 0">
+              <joint name="L_leg4_joint" axis="0 1 0" />
+              <inertial pos="-0.057500 -0.005189 0.000000" quat="1 0 0 0" mass="0.036715" diaginertia="0.000001 0.000057 0.000056" />
+              <geom name="L_leg4_collision" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="leg4_L" class="collision" />
+              <geom name="L_leg4_visual" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="leg4_L" class="visual" />
+              <site name="L_closed_loop_site4" pos="-0.115000 0 0" size="0.002" rgba="1 1 0 1"/>
+            </body>
+          </body>
+        </body>
+      </body>
+      <body name="R_thigh" pos="0 -0.169501 0" quat="0.973249 0 -0.229753 0">
+        <joint name="R_thigh_hipjoint" ref="0.463933" range="-62.8 62.8" axis="0 -1 0" />
+        <inertial pos="-0.089892 -0.006061 0.000732" quat="1 0 0 0" mass="0.242113" diaginertia="0.000087 0.001340 0.001259" />
+        <geom name="R_thigh_collision" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="thigh_R" class="collision" />
+        <geom name="R_thigh_visual" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="thigh_R" class="visual" />
+        <site name="R_closed_loop_site1" pos="-0.100000 -0.014000 0" size="0.002" rgba="1 1 0 1"/>
+        <site name="R_constant_force_site1" pos="-0.016246 -0.005500 -0.044635" size="0.002" rgba="1 1 0 1"/>
+        <site name="R_leglength_sensor_site1" pos="0 0 0" size="0.002" rgba="1 1 0 1"/>
+        <body name="R_leg5" pos="-0.215000 -0.004000 0" quat="0.832131 0 0.554628 0">
+          <joint name="R_leg5_joint" ref="1.965552" range="1.017882 2.557970" axis="0 -1 0" />
+          <inertial pos="0.098866 -0.020521 -0.000372" quat="1 0 0 0" mass="0.492371" diaginertia="0.000222 0.006123 0.005967" />
+          <geom name="R_leg5_collision" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="leg5_R" class="collision" />
+          <geom name="R_leg5_visual" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="leg5_R" class="visual" />
+          <site name="R_closed_loop_site2" pos="-0.056382 -0.010000 0.020521" size="0.002" rgba="1 1 0 1"/>
+          <site name="R_constant_force_site2" pos="0.049508 -0.001500 -0.007000" size="0.002" rgba="1 1 0 1"/>
+          <site name="R_leglength_sensor_site2" pos="0.254000 -0.026000 0" size="0.002" rgba="1 1 0 1"/>
+          <body name="R_wheel" pos="0.254000 -0.026000 0" quat="1 0 0 0">
+            <joint name="R_wheel_joint" axis="0 -1 0" />
+            <inertial pos="0.000105 -0.014232 0.000216" quat="1 0 0 0" mass="0.700000" diaginertia="0.000671 0.001081 0.000674" />
+            <geom name="R_wheel_ground_collision" pos="0 -0.021 0" quat="0.707107 0.707107 0 0" type="cylinder" size="0.065 0.01" class="collision" group="3" />
+            <geom name="R_wheel_visual" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="wheel_R" class="visual" />
+          </body>
+        </body>
+      </body>
+      <body name="R_leg1" pos="0 -0.183501 0" quat="0.973216 0 0.229896 0">
+        <joint name="R_leg1_hipjoint" ref="-0.463943" range="-62.8 62.8" axis="0 -1 0" />
+        <inertial pos="0.031594 -0.001353 0.000000" quat="1 0 0 0" mass="0.074014" diaginertia="0.000019 0.000120 0.000108" />
+        <geom name="R_leg1_collision" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="leg1_R" class="collision" />
+        <geom name="R_leg1_visual" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="leg1_R" class="visual" />
+        <body name="R_leg2" pos="0.100000 0 0" quat="0.832071 0 -0.554675 0">
+          <joint name="R_leg2_joint" axis="0 -1 0" />
+          <inertial pos="-0.056128 0.005198 0.000000" quat="1 0 0 0" mass="0.039289" diaginertia="0.000002 0.000068 0.000067" />
+          <geom name="R_leg2_collision" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="leg2_R" class="collision" />
+          <geom name="R_leg2_visual" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="leg2_R" class="visual" />
+          <body name="R_leg3" pos="-0.118140 0 0" quat="0.718376 0 0.695644 0">
+            <joint name="R_leg3_joint" axis="0 -1 0" />
+            <inertial pos="-0.090962 -0.003000 -0.007150" quat="1 0 0 0" mass="0.048623" diaginertia="0.000005 0.000145 0.000140" />
+            <geom name="R_leg3_collision" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="leg3_R" class="collision" />
+            <geom name="R_leg3_visual" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="leg3_R" class="visual" />
+            <site name="R_closed_loop_site3" pos="-0.117331 0 -0.013796" size="0.002" rgba="1 1 0 1"/>
+            <body name="R_leg4" pos="-0.175723 0 0" quat="0.798276 0 -0.602277 0">
+              <joint name="R_leg4_joint" axis="0 -1 0" />
+              <inertial pos="-0.057500 0.005189 0.000000" quat="1 0 0 0" mass="0.036715" diaginertia="0.000001 0.000057 0.000056" />
+              <geom name="R_leg4_collision" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="leg4_R" class="collision" />
+              <geom name="R_leg4_visual" pos="0 0 0" quat="1 0 0 0" type="mesh" mesh="leg4_R" class="visual" />
+              <site name="R_closed_loop_site4" pos="-0.115000 0 0" size="0.002" rgba="1 1 0 1"/>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+
+  <equality>
+    <connect name="left_loop1" site1="L_closed_loop_site1" site2="L_closed_loop_site3" solref="0.01 1" solimp="0.99 0.99"/>
+    <connect name="left_loop2" site1="L_closed_loop_site2" site2="L_closed_loop_site4" solref="0.01 1" solimp="0.99 0.99"/>
+    <connect name="right_loop1" site1="R_closed_loop_site1" site2="R_closed_loop_site3" solref="0.01 1" solimp="0.99 0.99"/>
+    <connect name="right_loop2" site1="R_closed_loop_site2" site2="R_closed_loop_site4" solref="0.01 1" solimp="0.99 0.99"/>
+  </equality>
+
+  <sensor>
+    <accelerometer name="imu_lin_acc" site="imu_site"/>
+    <gyro name="imu_ang_vel" site="imu_site"/>
+    <velocimeter name="imu_lin_vel" site="imu_site"/>
+    <subtreeangmom name="root_angmom" body="base_link"/>
+
+    <jointpos name="jointpos_L_thigh" joint="L_thigh_hipjoint"/>
+    <jointpos name="jointpos_L_leg1" joint="L_leg1_hipjoint"/>
+    <jointpos name="jointpos_R_thigh" joint="R_thigh_hipjoint"/>
+    <jointpos name="jointpos_R_leg1" joint="R_leg1_hipjoint"/>
+    <jointpos name="jointpos_L_wheel" joint="L_wheel_joint"/>
+    <jointpos name="jointpos_R_wheel" joint="R_wheel_joint"/>
+
+    <jointvel name="jointvel_L_thigh" joint="L_thigh_hipjoint"/>
+    <jointvel name="jointvel_L_leg1" joint="L_leg1_hipjoint"/>
+    <jointvel name="jointvel_R_thigh" joint="R_thigh_hipjoint"/>
+    <jointvel name="jointvel_R_leg1" joint="R_leg1_hipjoint"/>
+    <jointvel name="jointvel_L_wheel" joint="L_wheel_joint"/>
+    <jointvel name="jointvel_R_wheel" joint="R_wheel_joint"/>
+  </sensor>
+
+  <tendon>
+    <spatial name="Left_force" width="0.002">
+      <site site="L_constant_force_site1"/>
+      <site site="L_constant_force_site2"/>
+    </spatial>
+    <spatial name="Right_force" width="0.002">
+      <site site="R_constant_force_site1"/>
+      <site site="R_constant_force_site2"/>
+    </spatial>
+  </tendon>
+</mujoco>

@@ -1,0 +1,19 @@
+[project]
+name = "policy-compare"
+version = "0.1.0"
+description = "Side-by-side MuJoCo comparison of two trained hero policies"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "glfw>=2.11.0",
+    "mujoco==3.11.0",
+    "numpy>=2.4.6",
+    "onnxruntime>=1.31.1",
+]
+
+[project.scripts]
+policy-compare = "policy_compare:main"
+
+[build-system]
+requires = ["uv_build>=0.13.6,<0.14.0"]
+build-backend = "uv_build"
